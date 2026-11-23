@@ -21,7 +21,7 @@ export const chapters: ChapterDefinition[] = [
     "song": {
       "title": "Eres",
       "artist": "Café Tacvba",
-      "url": ""
+      "url": "https://www.youtube.com/watch?v=98Akpf1ph2o"
     },
     "photoIds": [
       "first-moments"
@@ -42,7 +42,7 @@ export const chapters: ChapterDefinition[] = [
     "song": {
       "title": "El Embrujo",
       "artist": "Morat",
-      "url": ""
+      "url": "https://www.youtube.com/watch?v=X0KkNGp6YNU"
     },
     "photoIds": [
       "jenni-smile"
@@ -69,7 +69,7 @@ export const chapters: ChapterDefinition[] = [
     "song": {
       "title": "Arroyito",
       "artist": "Fonseca",
-      "url": ""
+      "url": "https://www.youtube.com/watch?v=lj7IQDeBNlI"
     },
     "photoIds": [
       "memory-01",
@@ -95,7 +95,7 @@ export const chapters: ChapterDefinition[] = [
     "song": {
       "title": "Amor del bueno",
       "artist": "Reyli Barba",
-      "url": ""
+      "url": "https://www.youtube.com/watch?v=gW3OZC1NDTk"
     },
     "photoIds": [
       "together"
@@ -122,7 +122,7 @@ export const chapters: ChapterDefinition[] = [
     "song": {
       "title": "Ángel",
       "artist": "Elefante",
-      "url": ""
+      "url": "https://www.youtube.com/watch?v=kHUef5dcOWc"
     },
     "photoIds": [
       "birthday"

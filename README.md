@@ -43,7 +43,7 @@ La bienvenida puede repetirse. La constelación muestra las cinco estrellas y cu
 
 ## Personalizar
 
-Consulta [CONTENT_GUIDE.md](CONTENT_GUIDE.md) para la tabla completa de imágenes y cambios de música/texto. Las fotografías proporcionadas ya tienen una asociación inicial editable; no se han usado fotos de otras personas. Las cinco URLs musicales están vacías a la espera de los enlaces oficiales. La interfaz muestra su estado pendiente sin simular reproducción.
+Consulta [CONTENT_GUIDE.md](CONTENT_GUIDE.md) para la tabla completa de imágenes y cambios de música/texto. Las fotografías proporcionadas ya tienen una asociación inicial editable; no se han usado fotos de otras personas. Las cinco canciones ya tienen los enlaces de YouTube proporcionados. El reproductor se carga solo cuando Jenni decide escucharlo.
 
 Para regenerar las imágenes optimizadas después de cambiar los originales:
 

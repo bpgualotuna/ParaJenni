@@ -8,7 +8,7 @@ Todo el contenido se edita en el servidor. No pegues cartas futuras en component
 
 Las fechas usan un offset explícito `-05:00` y el calendario de Ecuador. El capítulo 1 se abre el **23 de noviembre de 2026**; el 5, el **27 de noviembre**. No cambies las fechas en la interfaz: el servidor es la fuente de verdad. Las dedicatorias iniciales son frases generales; no afirman lugares ni anécdotas que no se proporcionaron.
 
-## Canciones pendientes
+## Canciones configuradas
 
 En cada capítulo de `src/content/chapters.ts`, actualiza `song.url` con un enlace oficial compatible:
 
