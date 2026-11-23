@@ -1,0 +1,11 @@
+Imagenes/
+artifacts/
+.impeccable/
+.taste-skill/
+.agents/
+.codex/
+tests/
+*.log
+.env*
+!.env.example
+# private-media debe incluirse: las Functions lo sirven tras autorizar la fecha.

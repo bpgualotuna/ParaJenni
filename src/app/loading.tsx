@@ -1,0 +1,1 @@
+export default function Loading() { return <main id="main" className="quiet-state" aria-busy="true"><span className="loading-star" aria-hidden="true">✦</span><p>Encendiendo un pedacito de nuestro cielo…</p></main>; }

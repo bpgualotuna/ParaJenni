@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+dist/
+.env*
+!.env.example
+*.tsbuildinfo
+Imagenes/
+private-media/
+.taste-skill/
+.impeccable/
+artifacts/
+*.log
