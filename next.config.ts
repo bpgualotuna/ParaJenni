@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
   // Photos are resized by the authorized API. Disable Next's shared public
   // optimizer route so it cannot retain a private photo across date previews.
   images: { unoptimized: true },
-  outputFileTracingIncludes: { '/api/photos/*': ['./private-media/**/*'] },
+  outputFileTracingIncludes: {
+    '/api/photos/*': ['./private-media/**/*'],
+    '/api/voice-note': ['./private-media/**/*'],
+  },
   async headers() {
     return [{ source: '/:path*', headers: [
       { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },

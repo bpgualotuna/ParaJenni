@@ -11,9 +11,10 @@ const birthdayMatch = source.match(/export const birthdayCopy: BirthdayCopy = (\
 const birthdayCopy = birthdayMatch ? JSON.parse(birthdayMatch[1]) : null;
 const surpriseMarkers = birthdayCopy ? [birthdayCopy.prelude, birthdayCopy.wish, birthdayCopy.invitationDescription, birthdayCopy.puzzleTitle, birthdayCopy.couponTitle, birthdayCopy.couponDescription, birthdayCopy.couponDedication, birthdayCopy.giftFooter, birthdayCopy.puzzleComplete, birthdayCopy.puzzleOpened, birthdayCopy.keyInvitation] : [];
 let checked = 0;
+let voiceNote = null;
 
-async function check(url, status, { privateCache = true, inspectText = true } = {}) {
-  const response = await fetch(new URL(url, base), { headers: { cookie: 'DEV_NOW=2030-01-01T00:00:00Z; unlocked=5', 'x-client-time': '2030-01-01T00:00:00Z' } });
+async function check(url, status, { privateCache = true, inspectText = true, requestHeaders = {} } = {}) {
+  const response = await fetch(new URL(url, base), { headers: { cookie: 'DEV_NOW=2030-01-01T00:00:00Z; unlocked=5', 'x-client-time': '2030-01-01T00:00:00Z', ...requestHeaders } });
   assert.equal(response.status, status, url);
   if (privateCache) assert.match(response.headers.get('cache-control') ?? '', /no-store/, url);
   const bytes = Buffer.from(await response.arrayBuffer());
@@ -46,7 +47,8 @@ assert.equal(JSON.stringify(state).includes('giftMessage'), false);
 await check('/', 200);
 for (const chapter of state.chapters) {
   const expected = chapter.available ? 200 : 404;
-  await check(`/api/chapters/${chapter.id}?date=2030-01-01`, expected);
+  const api = await check(`/api/chapters/${chapter.id}?date=2030-01-01`, expected);
+  if (chapter.id === 5 && chapter.available) voiceNote = JSON.parse(api.bytes.toString('utf8')).voiceNote ?? null;
   const page = await check(`/capitulo/${chapter.id}?date=2030-01-01`, 200);
   if (!chapter.available) assert.ok(page.bytes.toString('utf8').includes('Esta estrella está guardando su sorpresa'));
 }
@@ -60,6 +62,7 @@ await check('/api/photos/%2e%2e%2fpackage.json', 404);
 await check('/_next/image?url=%2Fapi%2Fphotos%2Fbirthday&w=640&q=75', 404, { privateCache: false });
 await check('/private-media/birthday.webp', 404, { privateCache: false });
 await check('/Imagenes/20251127_102031.jpg', 404, { privateCache: false });
+await check('/api/voice-note?filename=birthday-message.m4a&date=2030-01-01', voiceNote ? 206 : 404, { inspectText: !voiceNote, requestHeaders: { range: 'bytes=0-1' } });
 const welcome = await check('/api/photos/welcome?w=320', 200, { inspectText: false });
 assert.equal(welcome.response.headers.get('content-type'), 'image/webp');
 const metadata = await sharp(welcome.bytes).metadata();

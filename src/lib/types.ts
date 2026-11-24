@@ -9,6 +9,7 @@ export interface ChapterSummary {
 }
 export interface Photo { id: string; src: string; alt: string; caption: string }
 export interface Song { title: string; artist: string; url: string }
+export interface VoiceNote { src: string; mimeType: string; transcript: string | null }
 export interface BirthdayCopy {
   prelude: string;
   heading: string;
@@ -36,6 +37,7 @@ export interface ChapterContent extends ChapterSummary {
   interaction: { type: InteractionType; messages: string[] };
   giftMessage?: string;
   birthdayCopy?: BirthdayCopy;
+  voiceNote?: VoiceNote;
 }
 export interface UniverseState {
   chapters: ChapterSummary[];

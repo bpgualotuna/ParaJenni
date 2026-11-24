@@ -2,8 +2,10 @@ import 'server-only';
 import path from 'node:path';
 import { birthdayCopy, chapters, giftMessage } from '@/content/chapters';
 import { photoManifest as photos, type PrivatePhoto } from '@/content/photo-manifest';
+import { photoDedications } from '@/content/personal-touches';
 import type { ChapterContent, ChapterSummary, Photo, UniverseState } from '@/lib/types';
 import { getServerNow, isUnlocked } from './clock';
+import { getVoiceNoteAsset } from './voice-note';
 
 function summary(chapter: (typeof chapters)[number], now: number): ChapterSummary {
   return {
@@ -14,7 +16,8 @@ function summary(chapter: (typeof chapters)[number], now: number): ChapterSummar
 }
 
 function photoView(photo: PrivatePhoto): Photo {
-  return { id: photo.id, src: `/api/photos/${photo.id}`, alt: photo.alt, caption: photo.caption };
+  const caption = photoDedications[photo.id]?.trim() || photo.caption;
+  return { id: photo.id, src: `/api/photos/${photo.id}`, alt: photo.alt, caption };
 }
 
 function photoUnlocked(photo: PrivatePhoto, now: number): boolean {
@@ -37,6 +40,7 @@ export function getChapter(id: number): ChapterContent | null {
   const chapter = chapters.find((item) => item.id === id);
   const now = getServerNow();
   if (!chapter || !isUnlocked(chapter.unlockAt, now)) return null;
+  const voiceNote = chapter.id === 5 ? getVoiceNoteAsset()?.note : undefined;
   return {
     ...summary(chapter, now), introduction: chapter.introduction,
     letter: chapter.letter, song: { ...chapter.song },
@@ -46,6 +50,7 @@ export function getChapter(id: number): ChapterContent | null {
     }),
     interaction: { ...chapter.interaction, messages: [...chapter.interaction.messages] },
     ...(chapter.id === 5 ? { giftMessage, birthdayCopy: { ...birthdayCopy, words: [...birthdayCopy.words] } } : {}),
+    ...(voiceNote ? { voiceNote } : {}),
   };
 }
 

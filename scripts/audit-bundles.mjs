@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readdir, readFile } from 'node:fs/promises';
+import { lstat, readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const root = process.cwd();
@@ -30,8 +30,21 @@ console.log(`PASS: ${scripts.length} production public JavaScript files contain 
 
 const tracePath = path.join(root, '.next/server/app/api/photos/[id]/route.js.nft.json');
 const trace = JSON.parse(await readFile(tracePath, 'utf8'));
-const media = trace.files.filter((filename) => filename.includes('private-media'));
+const media = trace.files.filter((filename) => filename.includes('private-media') && filename.endsWith('.webp'));
 const expected = (await readdir(path.join(root, 'private-media'))).filter((filename) => filename.endsWith('.webp'));
 assert.equal(media.length, expected.length, 'Every private photo must be included in the server function trace.');
 for (const filename of expected) assert.ok(media.some((entry) => entry.endsWith(`/${filename}`) || entry.endsWith(`\\${filename}`)), filename);
 console.log(`PASS: all ${expected.length} private WebP photos are traced into the server photo function for deployment.`);
+
+const personalSource = await readFile(path.join(root, 'src/content/personal-touches.ts'), 'utf8');
+const filenameMatch = personalSource.match(/\bfilename:\s*(?:'([^']*)'|"([^"]*)"|(null))/);
+const voiceFilename = filenameMatch?.[1] ?? filenameMatch?.[2] ?? null;
+if (voiceFilename && /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(voiceFilename) && /\.(m4a|mp3|ogg|webm|wav)$/i.test(voiceFilename)) {
+  const recording = await lstat(path.join(root, 'private-media', voiceFilename)).catch(() => null);
+  if (recording?.isFile() && recording.size > 0) {
+    const voiceTracePath = path.join(root, '.next/server/app/api/voice-note/route.js.nft.json');
+    const voiceTrace = JSON.parse(await readFile(voiceTracePath, 'utf8'));
+    assert.ok(voiceTrace.files.some((entry) => entry.endsWith(`/${voiceFilename}`) || entry.endsWith(`\\${voiceFilename}`)), 'Configured voice note must be included in the voice function trace.');
+    console.log('PASS: the configured private recording is traced into the voice function for deployment.');
+  }
+}
