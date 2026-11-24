@@ -34,3 +34,16 @@ Revisado en el navegador Chromium disponible, con escritorio y pantalla de 390 �
 No se ha publicado la aplicación ni probado en un iPhone/Safari físico. Las cinco canciones esperan sus URLs: el parser y el estado pendiente están probados, pero la reproducción de esas canciones concretas requiere enlaces válidos y disponibilidad de sus plataformas.
 
 El calendario protege contenido futuro; no hay autenticación de visitantes. Cualquier persona con el enlace puede consultar el contenido que ya esté desbloqueado. `noindex` no equivale a una contraseña. La publicación debe conservar las imágenes fuera de rutas estáticas y el repositorio privado.
+
+## Mejoras verificadas el 24 de noviembre de 2026
+
+- Lint y TypeScript sin errores ni advertencias; build de producción correcto.
+- 34 pruebas aprobadas: fechas, privacidad, personalización, rangos de audio, enlaces y progreso local validado.
+- Auditoría de bundles: 18 archivos públicos sin cartas ni narrativa privada del cumpleaños; los 12 WebP siguen incluidos en la función de fotos.
+- Producción: 23 comprobaciones HTTP aprobadas, con solo los capítulos 1 y 2 disponibles. `DEV_NOW=2030` se ignoró. La nota de voz continúa inaccesible antes del cumpleaños.
+- Navegador: reproducción real de «El Embrujo» dentro de YouTube, cierre que detiene el reproductor y música antes del sobre en los días 2–5.
+- Cinco corazones alrededor de la fotografía: constelación completa y progreso conservado tras recarga.
+- Cinco deseos: elección y cambio mediante controles nativos; selección conservada tras recarga.
+- Revisados móvil de 390 × 844, controles de 44 px en 320 px y cumpleaños de escritorio en 1440 × 900. Sin desbordamiento horizontal en los recorridos comprobados.
+- Cupón real generado, guardado y abierto como PNG de 1080 × 1340. La vista previa y los enlaces alternativos permiten conservarlo en el teléfono.
+- Las dedicatorias originales continúan hasta recibir textos personales. La nota de voz permanece oculta mientras no haya una grabación real configurada. La reproducción de una grabación personal y el guardado en Safari/iPhone físico quedan pendientes de ese recurso y dispositivo.

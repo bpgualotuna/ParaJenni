@@ -53,6 +53,45 @@ Para cambiar una fotografía:
 
 Para añadir otra, crea un ID nuevo en ambos mapas y añádelo a `photoIds` en el capítulo. Los IDs solo pueden resolver archivos incluidos en la lista del servidor; no se aceptan rutas arbitrarias. Si falta un archivo, la interfaz muestra un marco temporal y la aplicación sigue funcionando.
 
+## Dedicatorias personales del álbum
+
+`src/content/personal-touches.ts` contiene `photoDedications`, un mapa opcional por ID de fotografía. Los seis recuerdos comienzan con `null`: conservan las frases actuales del álbum. Puedes sustituir cada `null` por tus propias palabras, sin tocar la galería ni duplicar la configuración de fotografías. Una cadena vacía o solo con espacios también mantiene la dedicatoria original.
+
+```ts
+export const photoDedications: Record<string, string | null> = {
+  'memory-01': null,
+  'memory-02': null,
+  'memory-03': null,
+  'memory-04': null,
+  'memory-05': null,
+  'memory-06': null,
+};
+```
+
+Escribe únicamente recuerdos o detalles que conozcas. No hay lugares, fechas ni historias nuevas inventadas. La misma dedicatoria se utiliza en el capítulo y en el álbum ampliado. Los IDs desconocidos no añaden fotografías ni hacen aparecer contenido. Las dedicatorias siguen la fecha de autorización de su fotografía.
+
+## Nota de voz privada del cumpleaños
+
+La nota es opcional y permanece desactivada: no se ha generado ni imitado tu voz, y no se muestra un reproductor vacío. Para añadir una grabación real:
+
+1. Graba tu mensaje con el teléfono y guarda el archivo en `private-media/birthday-message.m4a`.
+2. En `src/content/personal-touches.ts`, cambia `voiceNoteConfig.filename` de `null` a `'birthday-message.m4a'`.
+3. Si deseas una alternativa de lectura, sustituye `transcript: null` por la transcripción real del mensaje. Es opcional y no se inventa automáticamente.
+4. Prueba el día 5 con `npm run dev:day -- 5` y escucha la grabación en el teléfono desde el que se usará la sorpresa.
+
+```ts
+export const voiceNoteConfig = {
+  filename: 'birthday-message.m4a',
+  transcript: null,
+};
+```
+
+También se aceptan archivos `.mp3`, `.ogg`, `.webm` y `.wav`; la reproducción depende del códec y del navegador. Usa únicamente el nombre del archivo, sin carpetas ni URL. El nombre configurado es la única grabación permitida: los parámetros de URL no seleccionan otros archivos. No se aceptan enlaces simbólicos. Si el archivo falta, está vacío o su extensión no está admitida, no aparece la sección; para desactivarla deliberadamente vuelve a `filename: null`.
+
+El mensaje y su transcripción solo se entregan desde el 27 de noviembre de 2026 a las 00:00 de Ecuador. `/api/voice-note` aplica la misma comprobación del servidor, permite solicitudes de rangos para avanzar en el audio y responde sin caché compartida. No pongas la grabación en `public` ni la subas a un servicio externo. La reproducción empieza únicamente cuando Jenni la solicita.
+
+En Vercel, conserva el archivo en `private-media` antes del build y despliegue. `next.config.ts` incluye esta carpeta en el trace de `/api/voice-note`; `.vercelignore` permite subirla mediante CLI. Con Git, sigue la misma precaución documentada para las fotografías: solo repositorio privado o preparación privada antes del build. Después ejecuta `node scripts/audit-bundles.mjs` para verificar también el empaquetado de la grabación configurada.
+
 ## Regalo y pruebas
 
 El mensaje final conserva el regalo físico en secreto. Puedes modificar las palabras y el texto del cupón sin revelar qué vas a entregar. No introduzcas datos familiares o anécdotas no confirmadas.

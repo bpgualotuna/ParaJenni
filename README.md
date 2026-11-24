@@ -53,6 +53,10 @@ node scripts/prepare-photos.mjs
 
 El script respeta la orientación, limita el tamaño a 1600 px, convierte a WebP y elimina metadatos EXIF. No recorta rostros. Mantén `Imagenes` y `private-media` fuera de `public`.
 
+La personalización opcional vive en `src/content/personal-touches.ts`: permite escribir dedicatorias reales para los recuerdos del álbum y añadir una grabación de voz privada al cumpleaños. Las dedicatorias vacías mantienen el texto actual. La nota de voz está desactivada hasta que aportes un archivo real; no se muestra un reproductor pendiente. Consulta la guía para activar, por ejemplo, `private-media/birthday-message.m4a` y añadir su transcripción opcional. El servidor protege ambos hasta su fecha correspondiente.
+
+Recursos personales opcionales pendientes: tu grabación de voz y las palabras concretas que quieras asociar a cada recuerdo. No se han inventado anécdotas ni generado voces. La experiencia funciona completa sin esos recursos.
+
 ## Probar los cinco días
 
 Detén el servidor de desarrollo anterior y elige una simulación:
@@ -98,7 +102,7 @@ Elige el proyecto y acepta la detección de Next.js. La primera publicación es 
 npx vercel --prod
 ```
 
-`.vercelignore` excluye originales, capturas y archivos locales; permite incluir `private-media`. Comprueba antes del despliegue que contiene los 12 `.webp`. `next.config.ts` incluye expresamente esta carpeta en el trazado de la función `/api/photos/*`, para que los archivos existan en Vercel y no solo en tu equipo. Más información: [archivos en Vercel Functions](https://vercel.com/kb/guide/how-can-i-use-files-in-serverless-functions) y [exclusiones con .vercelignore](https://vercel.com/docs/deployments/vercel-ignore).
+`.vercelignore` excluye originales, capturas y archivos locales; permite incluir `private-media`. Comprueba antes del despliegue que contiene los 12 `.webp` y, si la activaste, tu grabación. `next.config.ts` incluye expresamente esta carpeta en el trazado de las funciones `/api/photos/*` y `/api/voice-note`, para que los archivos existan en Vercel y no solo en tu equipo. Más información: [archivos en Vercel Functions](https://vercel.com/kb/guide/how-can-i-use-files-in-serverless-functions) y [exclusiones con .vercelignore](https://vercel.com/docs/deployments/vercel-ignore).
 
 Si prefieres integración con Git, crea **un repositorio privado**. Las fotografías están ignoradas para impedir subirlas por accidente: incorpóralas explícitamente solo a ese repositorio privado o añádelas durante un paso privado previo al build. No publiques un repositorio que contenga cartas y fotografías personales. Las fuentes musicales se cargan desde plataformas externas solo tras la interacción prevista.
 
