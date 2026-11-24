@@ -1,0 +1,11 @@
+.music-invitation{margin:0 0 19px!important;padding-bottom:17px;border-bottom:1px solid #f7e9db20;color:#e8c7db;font-family:var(--font-display);font-size:22px;line-height:1.5!important;font-style:italic;text-align:center}
+.chapter-experience .music-player:has(.music-invitation){margin-bottom:40px}
+.chapter-experience .round-control{min-width:44px;min-height:44px;flex-basis:44px}
+.chapter-experience .music-link{min-height:44px}
+.voice-note{max-width:620px;margin:0 auto 45px;padding:25px 0;color:var(--cream);text-align:center}
+.voice-note-heading{display:flex;align-items:center;justify-content:center;gap:13px;color:var(--rose)}
+.chapter-experience .voice-note h2{font-size:28px;margin:0;color:var(--cream)}
+.voice-note>p{font-size:15px;color:var(--muted);margin:12px 0 22px}
+.voice-note audio{display:block;width:100%;max-width:440px;margin:0 auto;min-height:48px;border-radius:24px;color-scheme:light}
+.voice-note details{margin-top:20px;text-align:left}.voice-note summary{cursor:pointer;color:var(--gold);min-height:44px;padding:10px 0;font-size:14px}.voice-note-transcript{white-space:pre-line;font-family:var(--font-display);font-size:20px;color:var(--cream)}.voice-note-error a{text-decoration:underline;text-underline-offset:4px;color:var(--gold)}
+@media(max-width:540px){.music-invitation{font-size:21px}.chapter-experience .music-player:has(.music-invitation){margin-bottom:28px}.chapter-experience .voice-note h2{font-size:25px}}

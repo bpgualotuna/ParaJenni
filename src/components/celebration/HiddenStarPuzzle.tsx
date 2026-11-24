@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Gift, Heart, KeyRound, RotateCcw, Sparkles, Star } from 'lucide-react';
 import type { BirthdayCopy } from '@/lib/types';
+import { DownloadableCoupon } from './DownloadableCoupon';
+import './celebration-polish.css';
 
 const positions = [[13, 15], [76, 11], [43, 29], [10, 63], [78, 66]];
 
@@ -12,7 +14,7 @@ export function MagicalGiftChest({ opened }: { opened: boolean }) {
 }
 
 export function GiftReveal({ message, copy }: { message: string; copy: BirthdayCopy }) {
-  return <div className="gift-reveal"><span className="gift-reveal-icon" aria-hidden="true"><Gift size={30} /></span><div className="gift-message">{message.split(/\n\s*\n/).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div><div className="gift-coupon"><Heart size={23} strokeWidth={1} /><h3>{copy.couponTitle}</h3><p>{copy.couponDescription}</p><span>{copy.couponDedication}</span></div></div>;
+  return <div className="gift-reveal"><span className="gift-reveal-icon" aria-hidden="true"><Gift size={30} /></span><div className="gift-message">{message.split(/\n\s*\n/).map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div><div className="gift-coupon"><Heart size={23} strokeWidth={1} /><h3>{copy.couponTitle}</h3><p>{copy.couponDescription}</p><span>{copy.couponDedication}</span></div><DownloadableCoupon copy={copy} /></div>;
 }
 
 export function HiddenStarPuzzle({ giftMessage, copy }: { giftMessage: string; copy: BirthdayCopy }) {

@@ -8,7 +8,7 @@ test('unconfigured and unsupported music never create an embed', () => {
 
 test('official YouTube links resolve to privacy enhanced embed with canonical original', () => {
   for (const url of ['https://youtu.be/dQw4w9WgXcQ?si=tracking', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=ignored', 'https://m.youtube.com/watch?v=dQw4w9WgXcQ', 'https://music.youtube.com/watch?v=dQw4w9WgXcQ', 'https://youtube.com/shorts/dQw4w9WgXcQ', 'https://youtube.com/embed/dQw4w9WgXcQ']) {
-    assert.deepEqual(getMusicEmbed(url), { embed: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1', original: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', platform: 'YouTube' });
+    assert.deepEqual(getMusicEmbed(url), { embed: 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&playsinline=1', original: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', platform: 'YouTube' });
   }
 });
 

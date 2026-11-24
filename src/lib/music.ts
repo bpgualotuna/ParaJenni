@@ -9,7 +9,7 @@ export function getMusicEmbed(raw: string): { embed: string; original: string; p
     }
     if (['youtube.com', 'www.youtube.com', 'm.youtube.com', 'music.youtube.com', 'youtu.be'].includes(url.hostname)) {
       const id = url.hostname === 'youtu.be' ? url.pathname.slice(1) : url.searchParams.get('v') || url.pathname.match(/^\/(?:embed|shorts)\/([^/]+)$/)?.[1];
-      if (id && /^[A-Za-z0-9_-]{11}$/.test(id)) return { embed: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1`, original: `https://www.youtube.com/watch?v=${id}`, platform: 'YouTube' };
+      if (id && /^[A-Za-z0-9_-]{11}$/.test(id)) return { embed: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1`, original: `https://www.youtube.com/watch?v=${id}`, platform: 'YouTube' };
     }
   } catch { /* An unfinished link is an expected content state. */ }
   return null;

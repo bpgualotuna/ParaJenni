@@ -5,10 +5,11 @@ import { ExternalLink, Music2, Play, X } from 'lucide-react';
 import type { Song } from '@/lib/types';
 import { getMusicEmbed } from '@/lib/music';
 
-export function MusicPlayer({ song }: { song: Song }) {
+export function MusicPlayer({ song, invitation }: { song: Song; invitation?: string }) {
   const [opened, setOpened] = useState(false);
   const integration = getMusicEmbed(song.url);
   return <section className="music-player" aria-label={`Nuestra canción: ${song.title}`}>
+    {invitation && <p className="music-invitation">{invitation}</p>}
     <div className="music-summary">
       <span className="record-art" aria-hidden="true"><Music2 size={24} /></span>
       <div className="song-info"><span className="song-label">Una canción para este momento</span><h3>{song.title}</h3><p>{song.artist}</p></div>
